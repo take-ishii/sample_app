@@ -2,6 +2,7 @@ require 'test_helper'
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
 
+  # 無効な送信に対するテスト
   test "invalid signup information" do
     get signup_path
     assert_no_difference 'User.count' do
@@ -14,5 +15,20 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_select 'div#error_explanation'
     assert_select 'div.alert-danger'
     assert_select 'form[action="/signup"]'
+  end
+  
+  # 有効な情報を送信するテスト
+  test "valid signup information" do
+    get signup_path
+    assert_difference 'User.count', 1 do
+      post users_path, params: { user: { name:  "Example User",
+                                         email: "user@example.com",
+                                         password:              "password",
+                                         password_confirmation: "password" } }
+    end
+    follow_redirect! # POSTリクエストを送信した結果を見て、指定されたリダイレクト先に移動するメソッド
+    assert_template 'users/show' # 登録成功後、どのテンプレートが表示されているかの検証
+    assert_not flash.empty?
+
   end
 end
