@@ -8,9 +8,7 @@ class SessionsController < ApplicationController
       # ユーザーログイン後にユーザー情報のページにリダイレクトする
       log_in @user
       params[:session][:remember_me] == '1' ? remember(@user) : forget(@user) # ユーザーを保持
-      redirect_to @user # redirect_to user_url(user)と等価
-      
-      
+      redirect_back_or @user
     else
       flash.now[:danger] = 'Invalid email/password combination' # flash.nowはレンダリングが終わっているページでフラッシュメッセージを表示、その後リクエストが発生したときに消滅
       render 'new'
