@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'      # 新しいセッションの作成（ログイン） "session#create"アクションの情報を"/login"へ送信
   delete '/logout',  to: 'sessions#destroy'     # セッションの削除（ログアウト）
   resources :users
+  resources :account_activations, only: [:edit] # アカウント有効化に使うリソース (editアクション) を追加する
 end
