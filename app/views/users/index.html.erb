@@ -1,6 +1,10 @@
 <% provide(:title, 'All users') %>
 <h1>All users</h1>
 
+<!-- usersビューのコードの中から@usersオブジェクトを自動的に見つけ出し、それから他のページにアクセスするためのページネーションリンクを作成 -->
+<!-- ページ切り替えの表示 -->
+<%= will_paginate %>
+
 <ul class="users">
   <% @users.each do |user| %>
     <li>
@@ -9,3 +13,6 @@
     </li>
   <% end %>
 </ul>
+
+<!-- ページ切り替えの表示 -->
+<%= will_paginate %>

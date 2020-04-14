@@ -3,7 +3,11 @@ class UsersController < ApplicationController
   before_action :correct_user,   only: [:edit, :update]
 
   def index
-    @users = User.all
+#    @users = User.all # こちらはユーザー全員の一括表示
+    @users = User.paginate(page: params[:page])
+    # peginateではキーが:pageで値がページ番号のハッシュを引数
+    # データベースからひとかたまりのデータ (デフォルトでは30) を取り出す
+    # params[:page]はwill_paginateで自動生成
   end
 
   def show
