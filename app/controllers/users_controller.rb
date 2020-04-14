@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update] # なんらかの処理が実行される直前に特定のメソッドを実行.onlyオプションをかけることでeditとupdateのみに制限
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy] # なんらかの処理が実行される直前に特定のメソッドを実行.onlyオプションをかけることでeditとupdateのみに制限
   before_action :correct_user,   only: [:edit, :update]
 
   def index
@@ -41,6 +41,12 @@ class UsersController < ApplicationController
     end
   end
   
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "User deleted"
+    redirect_to users_url
+  end
+
   private
 
   def user_params
