@@ -75,6 +75,6 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "authenticated? should return false for a user with nil digest" do
-    assert_not @user.authenticated?('') # 暗号化されていないトークンとダイジェストの一致を確かめるが、ダイジェストをもたないかトークン空でも問題なし
+    assert_not @user.authenticated?(:remember, '') # 暗号化されていないトークンとダイジェストの一致を確かめるが、ダイジェストをもたないかトークン空でも問題なし
   end
 end
