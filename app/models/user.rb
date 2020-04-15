@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :microposts
+  has_many :microposts, dependent: :destroy # userが削除されるとmicropostも削除
   
   attr_accessor :remember_token, :activation_token, :reset_token # 仮想の属性を生成
   before_save   :downcase_email
