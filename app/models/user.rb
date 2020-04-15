@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :microposts
+  
   attr_accessor :remember_token, :activation_token, :reset_token # 仮想の属性を生成
   before_save   :downcase_email
   before_create :create_activation_digest
