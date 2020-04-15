@@ -6,5 +6,6 @@ class CreateMicroposts < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
+    add_index :microposts, [:user_id, :created_at] # user_idとcreated_atカラムにインデックスが付与
   end
 end
