@@ -12,8 +12,16 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'         # 新しいセッションのページ（ログイン） "/login"へアクセスされた際に"session#new"アクションを実行
   post   '/login',   to: 'sessions#create'      # 新しいセッションの作成（ログイン） "session#create"アクションの情報を"/login"へ送信
   delete '/logout',  to: 'sessions#destroy'     # セッションの削除（ログアウト）
+
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
+
   resources :users
   resources :account_activations, only: [:edit] # アカウント有効化に使うリソース (editアクション) を追加する
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy]
+  resources :relationships,       only: [:create, :destroy]
 end
