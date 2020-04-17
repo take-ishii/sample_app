@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit] # アカウント有効化に使うリソース (editアクション) を追加する
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy]
+  resources :relationships,       only: [:create, :destroy]
 end
