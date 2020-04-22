@@ -1,26 +1,45 @@
 require 'rails_helper'
 
-RSpec.describe 'Access to static_pages', type: :request do
-  it "get home" do
-    get root_path
-    expect(response).to have_http_status(200)
-    expect(response.body).to include 'Ruby on Rails Tutorial Sample App'
-    expect(response.body).to_not include '| Ruby on Rails Tutorial Sample App'
-    
+RSpec.describe 'StaticPages', type: :request do
+  let(:base_title){ 'Ruby on Rails Tutorial Sample App' }
+  
+  describe "home" do
+    before { get root_path }
+    it "レスポンス" do
+      expect(response).to have_http_status(200)
+    end
+    it "タイトル" do
+      expect(response.body).to match(/<title>#{base_title}<\/title>/i)
+    end
   end
-  it "get help" do
-    get help_path
-    expect(response).to have_http_status(200)
-    expect(response.body).to include 'Help | Ruby on Rails Tutorial Sample App'
+  
+  describe "help" do
+    before { get help_path }
+    it "レスポンス" do
+      expect(response).to have_http_status(200)
+    end
+    it "タイトル" do
+      expect(response.body).to match(/<title>Help | #{base_title}<\/title>/i)
+    end
   end  
-  it "get about" do
-    get about_path
-    expect(response).to have_http_status(200)
-    expect(response.body).to include 'About | Ruby on Rails Tutorial Sample App'
+  
+  describe "about" do
+    before { get about_path }
+    it "レスポンス" do
+      expect(response).to have_http_status(200)
+    end
+    it "タイトル" do
+      expect(response.body).to match(/<title>About | #{base_title}<\/title>/i)
+    end
   end  
-  it "get contact" do
-    get contact_path
-    expect(response).to have_http_status(200)
-    expect(response.body).to include 'Contact | Ruby on Rails Tutorial Sample App'
+
+  describe "contact" do
+    before { get contact_path }
+    it "レスポンス" do
+      expect(response).to have_http_status(200)
+    end
+    it "タイトル" do
+      expect(response.body).to match(/<title>Contact | #{base_title}<\/title>/i)
+    end
   end  
 end
