@@ -37,7 +37,7 @@ group :test do
   gem 'guard',                    '2.16.2'
   gem 'guard-minitest',           '2.4.4'
   gem 'rspec-rails'
-  gem 'capybara'
+  gem 'capybara',                 '2.18.0'
   gem 'webdrivers'
 #  gem 'selenium-webdrivers'
   gem 'factory_bot_rails'

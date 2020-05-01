@@ -456,7 +456,7 @@ DEPENDENCIES
   bootstrap-sass (= 3.4.1)
   bootstrap-will_paginate (= 1.0.0)
   byebug (= 9.0.6)
-  capybara
+  capybara (= 2.18.0)
   carrierwave (= 1.2.2)
   coffee-rails (= 4.2.2)
   factory_bot_rails
