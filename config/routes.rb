@@ -24,4 +24,15 @@ Rails.application.routes.draw do
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
+  
+  namespace :api, format: 'json' do
+    namespace :v1 do
+      resources :users do
+        member do
+          get 'get_microposts'
+        end
+      end
+    end
+  end
+  
 end
