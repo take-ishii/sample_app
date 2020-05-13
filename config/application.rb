@@ -5,6 +5,7 @@ Bundler.require(*Rails.groups)
 module SampleApp
   class Application < Rails::Application
     config.load_defaults 5.1
+    config.assets.initialize_on_precompile = false
 
     # generatorを使う際に生成されるファイル
     # テストフレームワークにrspecを指定することでrails g~を実行した際に自動的にspecファイルも生成してくれる
