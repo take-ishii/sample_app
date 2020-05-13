@@ -1,7 +1,7 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      def get_microposts
+      def microposts
         user = User.find params[:id]
         microposts = user.microposts
         gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
