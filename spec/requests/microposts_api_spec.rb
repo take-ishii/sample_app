@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "get microposts api", type: :request do
+RSpec.describe "microposts api", type: :request do
 
   
   describe "特定ユーザーのマイクロポストを取得する" do
@@ -8,7 +8,7 @@ RSpec.describe "get microposts api", type: :request do
     let!(:micropost) { create_list(:user_post,200, user: user) }
     subject(:json) { JSON.parse(response.body) }  
     
-    before { get "/api/v1/users/#{user.id}/get_microposts" }
+    before { get "/api/v1/users/#{user.id}/microposts" }
     
     it "リクエストが成功していること" do
       expect(response.status).to eq(200)
