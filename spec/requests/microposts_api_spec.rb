@@ -36,7 +36,7 @@ RSpec.describe "microposts api", type: :request do
       end
       
       it "エラーメッセージが返ってきていること" do
-        expect(response.body).to eq('{"message":"Validation Failed"}')   
+        expect(json["message"]).to eq("Validation Failed")   
       end
     end
   end
