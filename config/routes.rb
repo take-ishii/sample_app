@@ -28,7 +28,9 @@ Rails.application.routes.draw do
   namespace :api, format: 'json' do
     namespace :v1 do
       resources :users do
-        resources :microposts,    only: [:index]
+        scope module: :users do
+          resources :microposts,  only: [:index]
+        end
       end
     end
   end
