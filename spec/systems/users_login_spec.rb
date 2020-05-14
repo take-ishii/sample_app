@@ -54,5 +54,4 @@ RSpec.describe 'UsersLogin', type: :system do
       expect(page).to have_link 'Log in', href: login_path
     end
   end
-
 end

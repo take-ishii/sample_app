@@ -26,5 +26,4 @@ RSpec.describe "microposts api", type: :request do
       expect(json["microposts"].length).to eq(200)
     end
   end
-
 end
