@@ -74,8 +74,8 @@ RSpec.describe "microposts api", type: :request do
     context "ユーザーIDが存在していない場合" do
       before { get "/api/v1/users/500/microposts" }
       
-      it "リクエストが成功していること" do
-        expect(response.status).to eq(200)
+      it "リクエストが失敗していること" do
+        expect(response.status).to eq(404)
       end
       
       it "エラーメッセージが返ってきていること" do

@@ -2,9 +2,10 @@ module Api
   module V1
     module Users
       class MicropostsController < ApplicationController
+
         def index
-          user = User.find_by(id: params[:user_id])
-          
+          user = User.find(params[:user_id])  
+
           if user
             gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
             gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=80"
@@ -12,6 +13,10 @@ module Api
           else
             render json: {message: "Validation Failed"}            
           end
+          
+          rescue ActiveRecord::RecordNotFound
+            response.status = 404
+            render json: {message: "Validation Failed"}
         end
       end
     end
