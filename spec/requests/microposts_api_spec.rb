@@ -10,7 +10,7 @@ RSpec.describe "microposts api", type: :request do
       let!(:user) { create(:user) }
       
       context "投稿があるユーザーの場合" do
-        let!(:micropost) { create_list(:user_post,200, user: user) }
+        let!(:micropost) { create_list(:user_post,2, user: user) }
         before { get "/api/v1/users/#{user.id}/microposts" }
   
         it "リクエストが成功していること" do
@@ -26,7 +26,7 @@ RSpec.describe "microposts api", type: :request do
         end    
         
         it "生成した全てのマイクロポストを取得していること" do
-          expect(json["microposts"].length).to eq(200)
+          expect(json["microposts"].length).to eq(2)
         end
       end
       
