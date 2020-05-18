@@ -10,7 +10,7 @@ RSpec.describe "microposts api", type: :request do
       let!(:user) { create(:user) }
       
       context "投稿があるユーザーの場合" do
-        let!(:micropost) { create_list(:user_post,2, user: user) }
+        let!(:microposts) { create_list(:user_post,2, user: user) }
         before { get "/api/v1/users/#{user.id}/microposts" }
   
         it "リクエストが成功していること" do
@@ -26,7 +26,7 @@ RSpec.describe "microposts api", type: :request do
         end    
         
         it "生成した全てのマイクロポストを取得していること" do
-          expect(json["microposts"].length).to eq(2)
+          expect(json["microposts"].length).to eq(microposts.length)
         end
       end
       
@@ -51,7 +51,7 @@ RSpec.describe "microposts api", type: :request do
       end
       
       context "膨大な投稿があるユーザーの場合" do
-        let!(:many_micropost) { create_list(:user_post,10000, user: user) }
+        let!(:microposts) { create_list(:user_post,10000, user: user) }
         before { get "/api/v1/users/#{user.id}/microposts" }
   
         it "リクエストが成功していること" do
@@ -67,7 +67,7 @@ RSpec.describe "microposts api", type: :request do
         end    
         
         it "生成した全てのマイクロポストを取得していること" do
-          expect(json["microposts"].length).to eq(10000)
+          expect(json["microposts"].length).to eq(microposts.length)
         end
       end
     end
