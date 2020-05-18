@@ -10,9 +10,9 @@ module Api
           gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=80"
           render json: {user_name: user.name, icon_url: gravatar_url, microposts: user.microposts}
           
-          rescue ActiveRecord::RecordNotFound
-            response.status = 404
-            render json: {message: "Validation Failed"}
+        rescue ActiveRecord::RecordNotFound
+          response.status = 404
+          render json: {message: "Validation Failed"}
         end
       end
     end
