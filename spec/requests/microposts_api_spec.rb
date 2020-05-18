@@ -5,10 +5,7 @@ RSpec.describe "microposts api", type: :request do
   
   describe "特定ユーザーのマイクロポストを取得する" do
     let!(:user) { create(:user) }
-    let!(:zeropost_user) { create(:user) }
-    let!(:manypost_user) { create(:user) }
     let!(:micropost) { create_list(:user_post,200, user: user) }
-    let!(:many_micropost) { create_list(:user_post,10000, user: manypost_user) }
     subject(:json) { JSON.parse(response.body) }  
     
     context "投稿があるユーザーの場合" do
@@ -32,6 +29,7 @@ RSpec.describe "microposts api", type: :request do
     end
     
     context "投稿がないユーザーの場合" do
+      let!(:zeropost_user) { create(:user) }
       before { get "/api/v1/users/#{zeropost_user.id}/microposts" }
 
       it "リクエストが成功していること" do
@@ -52,6 +50,8 @@ RSpec.describe "microposts api", type: :request do
     end
     
     context "膨大な投稿があるユーザーの場合" do
+      let!(:manypost_user) { create(:user) }
+      let!(:many_micropost) { create_list(:user_post,10000, user: manypost_user) }
       before { get "/api/v1/users/#{manypost_user.id}/microposts" }
 
       it "リクエストが成功していること" do
