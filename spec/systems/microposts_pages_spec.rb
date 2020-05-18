@@ -43,5 +43,4 @@ RSpec.describe "MicropostsPages", type: :feature do
       end
     end
   end
-
 end
