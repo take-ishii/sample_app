@@ -54,6 +54,7 @@ RSpec.describe "microposts api", type: :request do
       end
       
       context "投稿がないユーザーの場合" do
+        per_page = 20
         before { get "/api/v1/users/#{user.id}/microposts?page=1&per=#{per_page}" }
   
         it "リクエストが成功していること" do
