@@ -1,42 +1,19 @@
 require "rails_helper"
 
-shared_examples "1ページの検証" do
-  before { get "/api/v1/users/#{user.id}/microposts?page=1&per=#{per_page}" }
+shared_examples "マイクロポストの検証" do
+  before { get "/api/v1/users/#{user.id}/microposts?page=#{page}&per=#{per_page}" }
 
   it "リクエストが成功していること" do
     expect(response.status).to eq(200)
   end
-  
   it "ユーザー名を取得していること" do
     expect(json["user_name"]).to eq(user.name)
   end    
-  
   it "アイコンURLを取得していること" do
     expect(json["icon_url"]).to eq("https://secure.gravatar.com/avatar/#{Digest::MD5::hexdigest(user.email.downcase)}?s=80")
   end    
-  
-  it "1ページ目のマイクロポストを取得していること" do
-    expect(json["microposts"].length).to eq([microposts.length, per_page].min)
-  end
-end
-
-shared_examples "最終ページの検証" do
-  before { get "/api/v1/users/#{user.id}/microposts?page=#{microposts.length/per_page+1}&per=#{per_page}" }
-
-  it "リクエストが成功していること" do
-    expect(response.status).to eq(200)
-  end
-  
-  it "ユーザー名を取得していること" do
-    expect(json["user_name"]).to eq(user.name)
-  end    
-  
-  it "アイコンURLを取得していること" do
-    expect(json["icon_url"]).to eq("https://secure.gravatar.com/avatar/#{Digest::MD5::hexdigest(user.email.downcase)}?s=80")
-  end    
-  
-  it "1ページ目のマイクロポストを取得していること" do
-    expect(json["microposts"].length).to eq([microposts.length % per_page, per_page].min)
+  it "指定したページのマイクロポストを取得していること" do
+    expect(json["microposts"].length).to eq([microposts.length - (page - 1) * per_page, per_page].min)
   end
 end
 
@@ -52,24 +29,27 @@ RSpec.describe "microposts api", type: :request do
         let!(:microposts) { create_list(:user_post, 21, user: user) }
         let!(:per_page) { 20 }
         
-        context "1ページ目のmicropostsを取得しようとした場合" do
-          it_behaves_like "1ページの検証"
+        context "1ページ目のマイクロポストを取得しようとした場合" do
+          let!(:page) { 1 }
+          it_behaves_like "マイクロポストの検証"
         end
         
-        context "最終ページのmicropostsを取得しようとした場合" do
-          it_behaves_like "最終ページの検証"
+        context "最終ページのマイクロポストを取得しようとした場合" do
+          let!(:page) { microposts.length / per_page + 1 }
+          it_behaves_like "マイクロポストの検証"
         end
       end
       
       context "投稿がないユーザーの場合" do
         let!(:microposts) { create_list(:user_post, 0, user: user)}
+        let!(:page) { 1 }
         let!(:per_page) { 20 }
-        it_behaves_like "1ページの検証"
+        it_behaves_like "マイクロポストの検証"
       end
     end
 
     context "ユーザーIDが存在していない場合" do
-      before { get "/api/v1/users/500/microposts?page=1" }
+      before { get "/api/v1/users/500/microposts" }
       
       it "リクエストが失敗していること" do
         expect(response.status).to eq(404)
