@@ -49,7 +49,7 @@ RSpec.describe "microposts api", type: :request do
     end
 
     context "ユーザーIDが存在していない場合" do
-      let!(:id) { 500 }
+      let!(:id) { -1 }
       before { get "/api/v1/users/#{id}/microposts" }
       
       it "リクエストが失敗していること" do
