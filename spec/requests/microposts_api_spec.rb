@@ -49,14 +49,15 @@ RSpec.describe "microposts api", type: :request do
     end
 
     context "ユーザーIDが存在していない場合" do
-      before { get "/api/v1/users/500/microposts" }
+      let!(:id) { 500 }
+      before { get "/api/v1/users/#{id}/microposts" }
       
       it "リクエストが失敗していること" do
         expect(response.status).to eq(404)
       end
       
       it "エラーメッセージが返ってきていること" do
-        expect(json["message"]).to eq("Validation Failed")   
+        expect(json["error"]).to eq("Couldn't find User with 'id'=#{id}")   
       end
     end
   end
