@@ -27,8 +27,8 @@ HTTPメソッド：GET
       ・id (Integer)：マイクロポストのid
       ・content (String)：文章
       ・user_id (Integer)：ユーザーID
-      ・created_at (Time:ISO 8601形式の日付文字列)：生成時間
-      ・updated_at (Time:ISO 8601形式の日付文字列)：更新時間
+      ・created_at (Time:ISO 8601形式の日時文字列)：生成時間
+      ・updated_at (Time:ISO 8601形式の日時文字列)：更新時間
       ・picture
         ・url (String)：添付画像URL
       
