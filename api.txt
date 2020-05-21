@@ -38,29 +38,6 @@ HTTPメソッド：GET
       ・存在しないuser_idを指定したとき
         ・Couldn't find User with 'id'=〜
     
-ーjsonの形式
-　・正常時
-　  {
-　   "user_name": ,
-　   "icon_url":,
-　   "microposts":[
-  　    {
-  　     "id": ,
-  　     "content": ,
-  　     "user_id": ,
-  　     "created_at": ,
-  　     "updated_at": ,
-  　     "picture":{"url": }
-　     }
-　    ]
-　  }
-　
-　・エラー時
-　  {
-　    "status": ,
-　    "error": 
-　  }
-
 ーjsonの例
   ・正常時
     {
