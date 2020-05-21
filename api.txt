@@ -18,8 +18,7 @@ HTTPメソッド：GET
 ーステータスコードとパラメータ
 　・200：正常にレスポンスできたとき
 　・404：存在しないuser_idを指定したとき
-         URLが異常であるとき
-         
+
 ーデータ
 　・正常時
   　・user_name (String)：ユーザー名
@@ -38,8 +37,6 @@ HTTPメソッド：GET
     ・error (String)：エラーメッセージ
       ・存在しないuser_idを指定したとき
         ・Couldn't find User with 'id'=〜
-      ・URLがおかしいとき
-        ・Not Found
     
 ーjsonの形式
 　・正常時
