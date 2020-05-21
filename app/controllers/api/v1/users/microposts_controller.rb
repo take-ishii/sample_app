@@ -1,7 +1,7 @@
 module Api
   module V1
     module Users
-      class MicropostsController < ApplicationController
+      class MicropostsController < API::BaseController
 
         def index
           user = User.find(params[:user_id])  
