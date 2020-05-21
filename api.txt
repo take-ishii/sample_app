@@ -68,6 +68,7 @@ HTTPメソッド：GET
     }
   
   ・エラー時
-    {"status": 404,
-    "error": "Couldn't find User with 'id'=10000"
+    {
+      "status": 404,
+      "error": "Couldn't find User with 'id'=10000"
     }
