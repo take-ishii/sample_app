@@ -75,8 +75,6 @@ RSpec.describe User, type: :model do
     it "降順に表示されること" do
       new_post
       old_post
-      expect(user.microposts.count).to eq 2
-      expect(Micropost.all.count).to eq user.microposts.count
       expect(user.microposts.to_a).to eq [new_post, old_post]
     end
     
@@ -109,7 +107,6 @@ RSpec.describe User, type: :model do
       
       it { expect(user.microposts.count).to eq 10 }
       it { expect(not_following.microposts.count).to eq 10 }
-      it { expect(Micropost.all.count).to eq 110 }
       
       describe  "正しいマイクロポスト"  do
         it "フォローユーザーのマイクロポストが含まれていること" do

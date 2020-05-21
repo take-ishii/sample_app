@@ -7,7 +7,6 @@ RSpec.describe 'UsersIndex', type: :system do
 
   describe "index" do
     before { users }
-    it { expect(User.count).to eq users.count }
 
     scenario "ページネーションでユーザーが表示されること" do
       valid_login(user)

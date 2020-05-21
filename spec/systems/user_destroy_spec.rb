@@ -3,7 +3,6 @@ RSpec.describe 'UsersDestory', type: :system do
 
   describe "ユーザー削除権限" do
     before { users }
-    it { expect(User.count).to eq users.count }
 
     context "adminユーザーの場合" do
       scenario "ユーザーを削除できる" do
