@@ -22,19 +22,20 @@ HTTPメソッド：GET
          
 ーデータ
 　・正常時
-  　・user_name：ユーザー名
-  　・icon_url：アイコンのgravatarURL
+  　・user_name (String)：ユーザー名
+  　・icon_url (String)：アイコンのgravatarURL
   　・microposts
-      ・id：マイクロポストのid
-      ・content：文章
-      ・user_id：ユーザーID
-      ・created_at：生成時間
-      ・updated_at：更新時間
-      ・picture：添付画像URL
+      ・id (Integer)：マイクロポストのid
+      ・content (String)：文章
+      ・user_id (Integer)：ユーザーID
+      ・created_at (Time)：生成時間
+      ・updated_at (Time)：更新時間
+      ・picture
+        ・url (String)：添付画像URL
       
   ・エラー時
-    ・status：ステータスコード
-    ・error：エラーメッセージ
+    ・status (Integer)：ステータスコード
+    ・error (String)：エラーメッセージ
       ・存在しないuser_idを指定したとき
         ・Couldn't find User with 'id'=〜
       ・URLがおかしいとき
