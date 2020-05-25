@@ -46,7 +46,7 @@
 
 #### JSONの例
 - 正常時
-```
+```json
 {
   "user_name": "Example User",
   "icon_url": "https://secure.gravatar.com/avatar/bebfcf57d6d8277d806a9ef3385c078d?s=80",
@@ -75,7 +75,7 @@
 }
 ```
 - エラー時
-```
+```json
 {
   "status": 404,
   "error": "Couldn't find User with 'id'=10000"
