@@ -1,9 +1,9 @@
 ## API仕様書
 
 ### 実装されるAPI
-- [Micropost閲覧API](###Micropost閲覧API)
-- [フォローAPI](###フォローAPI)
-- [ログインAPI](###ログインAPI)
+- [Micropost閲覧API](#Micropost閲覧API)
+- [フォローAPI](#フォローAPI)
+- [ログインAPI](#ログインAPI)
 
 ### Micropost閲覧API
 #### 概要
