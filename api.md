@@ -46,41 +46,41 @@
 
 #### JSONの例
 - 正常時
-```json
-{
-  "user_name": "Example User",
-  "icon_url": "https://secure.gravatar.com/avatar/bebfcf57d6d8277d806a9ef3385c078d?s=80",
-  "microposts": [
-    {
-      "id": 295,
-      "content": "Cumque eum quam sed neque dignissimos ut quaerat harum.",
-      "user_id": 1,
-      "created_at": "2020-05-11T09:13:55.107Z",
-      "updated_at": "2020-05-11T09:13:55.107Z",
-      "picture": {
-        "url": null
+  ```json
+  {
+    "user_name": "Example User",
+    "icon_url": "https://secure.gravatar.com/avatar/bebfcf57d6d8277d806a9ef3385c078d?s=80",
+    "microposts": [
+      {
+        "id": 295,
+        "content": "Cumque eum quam sed neque dignissimos ut quaerat harum.",
+        "user_id": 1,
+        "created_at": "2020-05-11T09:13:55.107Z",
+        "updated_at": "2020-05-11T09:13:55.107Z",
+        "picture": {
+          "url": null
+        }
+      },
+      {
+        "id": 289,
+        "content": "Eius minus praesentium sunt dolorum.",
+        "user_id": 1,
+        "created_at": "2020-05-11T09:13:55.050Z",
+        "updated_at": "2020-05-11T09:13:55.050Z",
+        "picture": {
+          "url": null
+        }
       }
-    },
-    {
-      "id": 289,
-      "content": "Eius minus praesentium sunt dolorum.",
-      "user_id": 1,
-      "created_at": "2020-05-11T09:13:55.050Z",
-      "updated_at": "2020-05-11T09:13:55.050Z",
-      "picture": {
-        "url": null
-      }
-    }
-  ]
-}
-```
+    ]
+  }
+  ```
 - エラー時
-```json
-{
-  "status": 404,
-  "error": "Couldn't find User with 'id'=10000"
-}
-```
+  ```json
+  {
+    "status": 404,
+    "error": "Couldn't find User with 'id'=10000"
+  }
+  ```
 
 ### フォローAPI
 #### 概要
