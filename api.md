@@ -16,7 +16,7 @@
 - GET
 
 #### 入力（リクエスト）
-- user_id
+- user_id(Integer, required)
   - micropostsを表示するユーザーのID
 
 #### 出力（レスポンス）
@@ -93,15 +93,12 @@
 - POST
 
 #### 入力（リクエスト）
-- user_id
+- user_id(Integer, required)
   - フォローする側のユーザーID
-  - 必要性：必須
-- followed_id
+- followed_id(Integer, required)
   - フォローされる側のユーザーID
-  - 必要性：必須
-- token
+- token(token, required)
   - ログインページから持ってきて保存してあった認証トークン
-  - 必要性：必須
 
 
 #### 出力（レスポンス）
@@ -149,12 +146,10 @@
 - POST
 
 #### 入力（リクエスト）
-- user_id
+- user_id(Integer, required)
   - ログインしているユーザーID
-  - 必要性：必須
-- token
+- token(token, required)
   - 認証トークン
-  - 必要性：必須
 
 #### 出力（レスポンス）
 - 出力データ詳細
