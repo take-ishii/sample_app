@@ -111,7 +111,7 @@
     - 401：認証失敗した時
     - 404：リクエストしたリソースが存在しない時
   - データ
-    - is_logged
+    - is_logged_in
       - ログインしているかどうか
     - is_followed
       - フォローできたかどうか
@@ -119,23 +119,23 @@
 - 正常時（ステータス：200）
   - フォロー成功時
     - is_followed：true
-    - is_logged：true
+    - is_logged_in：true
   - 既にフォローしている時
     - is_followed：false
-    - is_logged：true
+    - is_logged_in：true
 
 - エラー時
   - tokenが一致せずログインに失敗した時
     - ステータス：401
     - is_followed：false
-    - is_logged：false
+    - is_logged_in：false
   - user_idが存在しない時
     - ステータス：404
-    - is_logged：false
+    - is_logged_in：false
     - is_followed：false
   - followed_idが存在しない
     - ステータス：404
-    - is_logged = true
+    - is_logged_in = true
     - is_followed = false
 
 ### ログインAPI
@@ -162,18 +162,18 @@
     - 200：正常にレスポンスできたとき
     - 401：認証失敗した時
     - 404：リクエストしたリソースが存在しない時
-  - is_logged
+  - is_logged_in
     - ログインしているかどうか
 
 - 正常時
   - ログイン成功時
     - ステータス：200
-    - is_logged：true
+    - is_logged_in：true
 
 - エラー時
   - user_idが存在しない
       - ステータスコード：404
-      - is_logged：false
+      - is_logged_in：false
   - user_idが存在するがtokenが不一致の時
     - ステータスコード：401
-    - is_logged：false
+    - is_logged_in：false
