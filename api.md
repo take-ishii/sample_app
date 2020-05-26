@@ -143,7 +143,7 @@
 - ユーザーがログインしているかを確認するAPI
 
 #### URI
-- /api/v1/users
+- /api/v1/users/session_validations
 
 #### HTTPメソッド
 - POST
