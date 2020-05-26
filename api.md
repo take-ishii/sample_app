@@ -10,7 +10,7 @@
 - クライアント側からリクエストがあったuser_idのmicropostsを返す
 
 #### URI
-- /api/v1/users/"user_id"/microposts
+- /api/v1/users/{user_id}/microposts
 
 #### HTTPメソッド
 - GET
