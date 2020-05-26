@@ -135,8 +135,8 @@
     - is_followed：false
   - followed_idが存在しない
     - ステータス：404
-    - is_logged_in = true
-    - is_followed = false
+    - is_logged_in：true
+    - is_followed：false
 
 ### ログインバリデーションAPI
 #### 概要
