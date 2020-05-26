@@ -138,7 +138,7 @@
     - is_logged_in = true
     - is_followed = false
 
-### ログインAPI
+### ログインバリデーションAPI
 #### 概要
 - ユーザーがログインしているかを確認するAPI
 
