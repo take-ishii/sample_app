@@ -7,6 +7,7 @@ module Api
         end
 
         private
+        
           def render_is_logged_in
             user = User.find_by(id: params[:user_id])
             authenticate_with_http_token do |token, options|
