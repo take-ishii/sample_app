@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
   def new
-    @outside_url = params[:url]
-    if logged_in? && !@outside_url.nil?
-      redirect_to "#{@outside_url}?user_id=#{cookies.permanent.signed[:user_id]}&token=#{cookies.permanent[:remember_token]}"
+    session[:outside_url] = params[:url]
+    if logged_in? && !session[:outside_url].nil?
+      redirect_to "#{session[:outside_url]}?user_id=#{cookies.permanent.signed[:user_id]}&token=#{cookies.permanent[:remember_token]}"
     end
   end
   
@@ -12,7 +12,12 @@ class SessionsController < ApplicationController
       if @user.activated?
         log_in @user
         params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
-        redirect_back_or @user
+        if !session[:outside_url].nil?
+          @user.remember if params[:session][:remember_me] != '1'
+          redirect_to "#{session[:outside_url]}?user_id=#{@user.id}&token=#{@user.remember_token}"
+        else
+          redirect_back_or @user
+        end
       else
         message  = "Account not activated. "
         message += "Check your email for the activation link."
