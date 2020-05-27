@@ -122,14 +122,10 @@
     - is_logged_in：true
 
 - エラー時
-  - tokenが一致せずログインに失敗した時
+  - user_idが存在しない・tokenが一致せずログインに失敗した時
     - ステータス：401
     - is_followed：false
     - is_logged_in：false
-  - user_idが存在しない時
-    - ステータス：404
-    - is_logged_in：false
-    - is_followed：false
   - followed_idが存在しない
     - ステータス：404
     - is_logged_in：true
