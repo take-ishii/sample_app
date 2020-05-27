@@ -131,6 +131,42 @@
     - is_logged_in：true
     - followed：false
 
+#### JSONの例
+- 正常時
+  - フォロー成功した時
+    ```json
+    {
+      "status": "200",
+      "is_logged_in": "true",
+      "followed": "true",
+    }
+    ```
+  - 既にフォローしている時
+    ```json
+    {
+      "status": "200",
+      "is_logged_in": "true",
+      "followed": "false",
+    }
+    ```
+- エラー時
+  - user_idが存在しない・tokenが一致せずログインに失敗した時
+    ```json
+    {
+      "status": "401",
+      "is_logged_in": "false",
+      "followed": "false",
+    }
+    ```
+  - followed_idが存在しない時
+    ```json
+    {
+      "status": "404",
+      "is_logged_in": "true",
+      "followed": "false",
+    }
+    ```
+
 ### ログインバリデーションAPI
 #### 概要
 - ユーザーがログインしているかを確認するAPI
