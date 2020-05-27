@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
   def new
+    @outside_url = params[:url]
+    if logged_in? && !@outside_url.nil?
+      redirect_to "#{@outside_url}?user_id=#{cookies.permanent.signed[:user_id]}&token=#{cookies.permanent[:remember_token]}"
+    end
   end
   
   def create
