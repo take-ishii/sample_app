@@ -6,7 +6,7 @@ RSpec.describe 'UsersLogin', type: :system do
   subject { page }
   let(:not_active_user) { create(:other_user, activated: false) }
 
-  describe "login" do
+  describe "内部からのログイン" do
     before { visit "/login" }
 
     context "ログインの値が有効の場合" do
@@ -44,7 +44,23 @@ RSpec.describe 'UsersLogin', type: :system do
       end
     end
   end
-
+  
+  describe "外部からのログイン" do
+    context "ログインしている場合" do
+      context "cookieにidとtokenが保存されている場合" do
+        let(:outside_user) { create(:user) }
+        before do
+          valid_remember_login(outside_user)
+          visit "/login?url=#{help_url}"
+        end
+        
+        scenario "リダイレクトURLが指定したURLであること" do
+          expect(page).to have_current_path(help_url, ignore_query: true)
+        end
+      end
+    end
+  end
+  
   describe "logout" do
     scenario "正常にログアウトできること" do
       valid_login(user)
