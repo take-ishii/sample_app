@@ -177,6 +177,10 @@
 #### HTTPメソッド
 - GET
 
+#### HTTPリクエストヘッダー
+- Authorization
+  - remember_tokenが入っている
+
 #### 入力（リクエスト）
 - user_id(Integer, required)
   - ログインしているユーザーID
