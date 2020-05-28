@@ -78,7 +78,7 @@ RSpec.describe 'UsersLogin', type: :system do
           click_button "Log in"
         end
         after do
-#          visit root_url
+          visit root_url
         end
         
         scenario "リダイレクトURLが指定したURLであること" do
