@@ -34,5 +34,12 @@ RSpec.describe "SessionValidations", type: :request do
         expect(response.status).to eq(401)
       end
     end
+
+    context `unavailable user_id and remember_token` do
+      it `returns "false"` do
+        get "/api/v1/users/999/session_validations", headers: { Authorization: "Token token=WrongToken" }
+        expect(response.status).to eq(401)
+      end
+    end
   end
 end
