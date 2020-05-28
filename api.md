@@ -110,30 +110,62 @@
   - データ
     - is_logged_in
       - ログインしているかどうか
-    - is_followed
+    - followed
       - フォローできたかどうか
 
 - 正常時（ステータス：200）
   - フォロー成功時
-    - is_followed：true
+    - followed：true
     - is_logged_in：true
   - 既にフォローしている時
-    - is_followed：false
+    - followed：false
     - is_logged_in：true
 
 - エラー時
-  - tokenが一致せずログインに失敗した時
+  - user_idが存在しない・tokenが一致せずログインに失敗した時
     - ステータス：401
-    - is_followed：false
+    - followed：false
     - is_logged_in：false
-  - user_idが存在しない時
-    - ステータス：404
-    - is_logged_in：false
-    - is_followed：false
   - followed_idが存在しない
     - ステータス：404
     - is_logged_in：true
-    - is_followed：false
+    - followed：false
+
+#### JSONの例
+- 正常時
+  - フォロー成功した時
+    ```json
+    {
+      "status": "200",
+      "is_logged_in": "true",
+      "followed": "true",
+    }
+    ```
+  - 既にフォローしている時
+    ```json
+    {
+      "status": "200",
+      "is_logged_in": "true",
+      "followed": "false",
+    }
+    ```
+- エラー時
+  - user_idが存在しない・tokenが一致せずログインに失敗した時
+    ```json
+    {
+      "status": "401",
+      "is_logged_in": "false",
+      "followed": "false",
+    }
+    ```
+  - followed_idが存在しない時
+    ```json
+    {
+      "status": "404",
+      "is_logged_in": "true",
+      "followed": "false",
+    }
+    ```
 
 ### ログインバリデーションAPI
 #### 概要
