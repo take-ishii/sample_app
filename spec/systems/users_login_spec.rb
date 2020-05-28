@@ -62,6 +62,12 @@ RSpec.describe 'UsersLogin', type: :system do
         scenario "リダイレクトURLが指定したURLであること" do
           expect(page).to have_current_path(help_url, ignore_query: true)
         end
+        scenario "user_idとtokenがURLに含まれていること" do
+          expect(current_url).to include("user_id=")
+          expect(current_url).to_not include("user_id=&")
+          expect(current_url).to include("token=")
+          expect(current_url).to_not end_with("token=")
+        end
       end
     end
   end
