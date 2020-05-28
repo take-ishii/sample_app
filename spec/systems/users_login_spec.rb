@@ -46,11 +46,11 @@ RSpec.describe 'UsersLogin', type: :system do
   end
   
   describe "外部からのログイン" do
+    let(:user) { create(:user) }
     context "ログインしている場合" do
       context "cookieにidとtokenが保存されている場合" do
-        let(:outside_user) { create(:user) }
         before do
-          valid_remember_login(outside_user)
+          valid_remember_login(user)
           visit "/login?url=#{help_url}"
         end
         after do
@@ -69,9 +69,8 @@ RSpec.describe 'UsersLogin', type: :system do
       end
       
       context "cookieにidとtokenが保存されていない場合" do
-        let(:outside_user) { create(:user) }
         before do
-          valid_login(outside_user)
+          valid_login(user)
           visit "/login?url=#{help_url}"
           fill_in "Email", with: user.email
           fill_in "Password", with: user.password
@@ -94,7 +93,6 @@ RSpec.describe 'UsersLogin', type: :system do
     end
     
     context "ログインしていない場合" do
-      let(:outside_user) { create(:user) }
       before do
         visit "/login?url=#{help_url}"
         fill_in "Email", with: user.email
