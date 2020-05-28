@@ -27,5 +27,12 @@ RSpec.describe "SessionValidations", type: :request do
         expect(response.status).to eq(401)
       end
     end
+
+    context `nil remember_token` do
+      it `returns "false"` do
+        get "/api/v1/users/#{user.id}/session_validations"
+        expect(response.status).to eq(401)
+      end
+    end
   end
 end
