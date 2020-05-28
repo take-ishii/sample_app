@@ -172,7 +172,7 @@
 - ユーザーがログインしているかを確認するAPI
 
 #### URI
-- /api/v1/users/session_validations
+- /api/v1/users/{user_id}/session_validations
 
 #### HTTPメソッド
 - GET
