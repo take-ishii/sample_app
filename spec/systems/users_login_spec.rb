@@ -62,10 +62,9 @@ RSpec.describe 'UsersLogin', type: :system do
           expect(page).to have_current_path(help_url, ignore_query: true)
         end
         scenario "user_idとtokenがURLに含まれていること" do
-          expect(current_url).to include("user_id=")
-          expect(current_url).to_not include("user_id=&")
-          expect(current_url).to include("token=")
-          expect(current_url).to_not end_with("token=")
+          query_hash = Rack::Utils.parse_nested_query(URI.parse(current_url).query)
+          expect(query_hash['user_id']).to_not be_empty
+          expect(query_hash['token']).to_not be_empty
         end
       end
       
@@ -86,10 +85,9 @@ RSpec.describe 'UsersLogin', type: :system do
           expect(page).to have_current_path(help_url, ignore_query: true)
         end
         scenario "user_idとtokenがURLに含まれていること" do
-          expect(current_url).to include("user_id=")
-          expect(current_url).to_not include("user_id=&")
-          expect(current_url).to include("token=")
-          expect(current_url).to_not end_with("token=")
+          query_hash = Rack::Utils.parse_nested_query(URI.parse(current_url).query)
+          expect(query_hash['user_id']).to_not be_empty
+          expect(query_hash['token']).to_not be_empty
         end
       end
     end
@@ -110,10 +108,9 @@ RSpec.describe 'UsersLogin', type: :system do
         expect(page).to have_current_path(help_url, ignore_query: true)
       end
       scenario "user_idとtokenがURLに含まれていること" do
-        expect(current_url).to include("user_id=")
-        expect(current_url).to_not include("user_id=&")
-        expect(current_url).to include("token=")
-        expect(current_url).to_not end_with("token=")
+        query_hash = Rack::Utils.parse_nested_query(URI.parse(current_url).query)
+        expect(query_hash['user_id']).to_not be_empty
+        expect(query_hash['token']).to_not be_empty
       end
     end
   end
