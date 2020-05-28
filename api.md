@@ -172,10 +172,14 @@
 - ユーザーがログインしているかを確認するAPI
 
 #### URI
-- /api/v1/users/session_validations
+- /api/v1/users/{user_id}/session_validations
 
 #### HTTPメソッド
-- POST
+- GET
+
+#### HTTPリクエストヘッダー
+- Authorization
+  - remember_tokenが入っている
 
 #### 入力（リクエスト）
 - user_id(Integer, required)
@@ -188,19 +192,11 @@
   - ステータスコード
     - 200：正常にレスポンスできたとき
     - 401：認証失敗した時
-    - 404：リクエストしたリソースが存在しない時
-  - is_logged_in
-    - ログインしているかどうか
 
 - 正常時
   - ログイン成功時
     - ステータス：200
-    - is_logged_in：true
 
 - エラー時
-  - user_idが存在しない
-      - ステータスコード：404
-      - is_logged_in：false
-  - user_idが存在するがtokenが不一致の時
+  - user_idが存在しない・tokenが不一致の時
     - ステータスコード：401
-    - is_logged_in：false
