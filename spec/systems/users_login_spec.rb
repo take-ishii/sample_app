@@ -55,8 +55,6 @@ RSpec.describe 'UsersLogin', type: :system do
         end
         after do
           visit root_url
-          click_link "Account"
-          click_link "Log out"
         end
         
         scenario "リダイレクトURLが指定したURLであること" do
