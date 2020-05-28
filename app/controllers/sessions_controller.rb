@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
     session[:outside_url] = params[:url]
-    if logged_in? && !session[:outside_url].nil? && !cookies.permanent.signed[:user_id].nil? && !cookies.permanent[:remember_token].nil?
+    if logged_in? && session[:outside_url].present? && cookies.permanent.signed[:user_id].present? && cookies.permanent[:remember_token].present?
       redirect_to "#{session[:outside_url]}?user_id=#{cookies.permanent.signed[:user_id]}&token=#{cookies.permanent[:remember_token]}"
     end
   end
@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       if @user.activated?
         log_in @user
         params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
-        if !session[:outside_url].nil?
+        if session[:outside_url].present?
           @user.remember if params[:session][:remember_me] != '1'
           redirect_to "#{session[:outside_url]}?user_id=#{@user.id}&token=#{@user.remember_token}"
         else
