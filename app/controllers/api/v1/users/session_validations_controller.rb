@@ -4,9 +4,9 @@ module Api
       class SessionValidationsController < ApplicationController
         def index
           if logged_in?(params[:user_id])
-            render json: { is_logged_in: 'true' }
+            head 200
           else
-            render json: { is_logged_in: 'false' }, status: 401
+            head 401
           end
         end
 
