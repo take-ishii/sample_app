@@ -53,6 +53,11 @@ RSpec.describe 'UsersLogin', type: :system do
           valid_remember_login(outside_user)
           visit "/login?url=#{help_url}"
         end
+        after do
+          visit root_url
+          click_link "Account"
+          click_link "Log out"
+        end
         
         scenario "リダイレクトURLが指定したURLであること" do
           expect(page).to have_current_path(help_url, ignore_query: true)
