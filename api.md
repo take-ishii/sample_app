@@ -199,12 +199,10 @@
 - 正常時
   - ログイン成功時
     - ステータス：200
-    - is_logged_in：true
 
 - エラー時
   - user_idが存在しない・tokenが不一致の時
     - ステータスコード：401
-    - is_logged_in：false
 
 #### JSONの例
 - 正常時
