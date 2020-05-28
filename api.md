@@ -92,6 +92,11 @@
 #### HTTPメソッド
 - POST
 
+#### リクエストヘッダ
+
+- Content-Type (required)
+  - 常に `application/json` とする
+
 #### 入力（リクエスト）
 - user_id(Integer, required)
   - フォローする側のユーザーID
@@ -176,6 +181,11 @@
 
 #### HTTPメソッド
 - POST
+
+#### リクエストヘッダ
+
+- Content-Type (required)
+  - 常に `application/json` とする
 
 #### 入力（リクエスト）
 - user_id(Integer, required)
