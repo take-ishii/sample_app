@@ -198,9 +198,6 @@
     - is_logged_in：true
 
 - エラー時
-  - user_idが存在しない
-      - ステータスコード：404
-      - is_logged_in：false
-  - user_idが存在するがtokenが不一致の時
+  - user_idが存在しない・tokenが不一致の時
     - ステータスコード：401
     - is_logged_in：false
