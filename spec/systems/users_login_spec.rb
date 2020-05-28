@@ -92,6 +92,29 @@ RSpec.describe 'UsersLogin', type: :system do
         end
       end
     end
+    
+    context "ログインしていない場合" do
+      let(:outside_user) { create(:user) }
+      before do
+        visit "/login?url=#{help_url}"
+        fill_in "Email", with: user.email
+        fill_in "Password", with: user.password
+        click_button "Log in"
+      end
+      after do
+        visit root_url
+      end
+      
+      scenario "リダイレクトURLが指定したURLであること" do
+        expect(page).to have_current_path(help_url, ignore_query: true)
+      end
+      scenario "user_idとtokenがURLに含まれていること" do
+        expect(current_url).to include("user_id=")
+        expect(current_url).to_not include("user_id=&")
+        expect(current_url).to include("token=")
+        expect(current_url).to_not end_with("token=")
+      end
+    end
   end
   
   describe "logout" do
