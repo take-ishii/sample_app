@@ -54,6 +54,7 @@ RSpec.describe 'UsersLogin', type: :system do
           visit "/login?url=#{help_url}"
         end
         after do
+          # FIXME: visitしないとCookieが消えずログイン状態が引き継がれる
           visit root_url
         end
         
@@ -77,6 +78,7 @@ RSpec.describe 'UsersLogin', type: :system do
           click_button "Log in"
         end
         after do
+          # FIXME: visitしないとCookieが消えずログイン状態が引き継がれる
           visit root_url
         end
         
@@ -100,6 +102,7 @@ RSpec.describe 'UsersLogin', type: :system do
         click_button "Log in"
       end
       after do
+        # FIXME: visitしないとCookieが消えずログイン状態が引き継がれる
         visit root_url
       end
       
