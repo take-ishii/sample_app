@@ -15,28 +15,28 @@ RSpec.describe "SessionValidations", type: :request do
     end
 
     context `unavailable user_id` do
-      it `returns "false"` do
+      it `returns 401` do
         get "/api/v1/users/999/session_validations", headers: { Authorization: "Token token=#{remember_token}" }
         expect(response.status).to eq(401)
       end
     end
 
     context `unavailable remember_token` do
-      it `returns "false"` do
+      it `returns 401` do
         get "/api/v1/users/#{user.id}/session_validations", headers: { Authorization: "Token token=WrongToken" }
         expect(response.status).to eq(401)
       end
     end
 
     context `nil remember_token` do
-      it `returns "false"` do
+      it `returns 401` do
         get "/api/v1/users/#{user.id}/session_validations"
         expect(response.status).to eq(401)
       end
     end
 
     context `unavailable user_id and remember_token` do
-      it `returns "false"` do
+      it `returns 401` do
         get "/api/v1/users/999/session_validations", headers: { Authorization: "Token token=WrongToken" }
         expect(response.status).to eq(401)
       end
