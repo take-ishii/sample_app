@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'uri'
 
 RSpec.describe 'UsersLogin', type: :system do
   include_context "setup"
@@ -51,11 +52,9 @@ RSpec.describe 'UsersLogin', type: :system do
       context "cookieにidとtokenが保存されている場合" do
         before do
           valid_remember_login(user)
-          visit "/login?url=#{help_url}"
-        end
-        after do
-          # FIXME: visitしないとCookieが消えずログイン状態が引き継がれる
-          visit root_url
+          uri = URI(login_url)
+          uri.query = URI.encode_www_form({url: help_url})
+          visit uri
         end
         
         scenario "リダイレクトURLが指定したURLであること" do
@@ -71,14 +70,12 @@ RSpec.describe 'UsersLogin', type: :system do
       context "cookieにidとtokenが保存されていない場合" do
         before do
           valid_login(user)
-          visit "/login?url=#{help_url}"
+          uri = URI(login_url)
+          uri.query = URI.encode_www_form({url: help_url})
+          visit uri
           fill_in "Email", with: user.email
           fill_in "Password", with: user.password
           click_button "Log in"
-        end
-        after do
-          # FIXME: visitしないとCookieが消えずログイン状態が引き継がれる
-          visit root_url
         end
         
         scenario "リダイレクトURLが指定したURLであること" do
@@ -94,14 +91,12 @@ RSpec.describe 'UsersLogin', type: :system do
     
     context "ログインしていない場合" do
       before do
-        visit "/login?url=#{help_url}"
+        uri = URI(login_url)
+        uri.query = URI.encode_www_form({url: help_url})
+        visit uri
         fill_in "Email", with: user.email
         fill_in "Password", with: user.password
         click_button "Log in"
-      end
-      after do
-        # FIXME: visitしないとCookieが消えずログイン状態が引き継がれる
-        visit root_url
       end
       
       scenario "リダイレクトURLが指定したURLであること" do
