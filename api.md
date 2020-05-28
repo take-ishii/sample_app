@@ -175,7 +175,7 @@
 - /api/v1/users/session_validations
 
 #### HTTPメソッド
-- POST
+- GET
 
 #### 入力（リクエスト）
 - user_id(Integer, required)
