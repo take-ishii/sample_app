@@ -201,3 +201,18 @@
   - user_idが存在しない・tokenが不一致の時
     - ステータスコード：401
     - is_logged_in：false
+
+#### JSONの例
+- 正常時
+  ```json
+  {
+    "is_logged_in": "true",
+  }
+  ```
+
+- エラー時
+  ```json
+  {
+    "is_logged_in": "false",
+  }
+  ```
