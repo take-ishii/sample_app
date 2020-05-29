@@ -53,7 +53,8 @@ RSpec.describe 'UsersLogin', type: :system do
         before do
           valid_remember_login(user)
           uri = URI(login_url)
-          uri.query = URI.encode_www_form({url: help_url})
+          ar = (uri.query ? URI.decode_www_form(uri.query) : []) << ["url", help_url]
+          uri.query = URI.encode_www_form(ar)          
           visit uri
         end
         
@@ -66,12 +67,12 @@ RSpec.describe 'UsersLogin', type: :system do
           expect(query_hash['token']).to_not be_empty
         end
       end
-      
       context "cookieにidとtokenが保存されていない場合" do
         before do
           valid_login(user)
           uri = URI(login_url)
-          uri.query = URI.encode_www_form({url: help_url})
+          ar = (uri.query ? URI.decode_www_form(uri.query) : []) << ["url", help_url]
+          uri.query = URI.encode_www_form(ar)          
           visit uri
           fill_in "Email", with: user.email
           fill_in "Password", with: user.password
@@ -88,11 +89,11 @@ RSpec.describe 'UsersLogin', type: :system do
         end
       end
     end
-    
     context "ログインしていない場合" do
       before do
         uri = URI(login_url)
-        uri.query = URI.encode_www_form({url: help_url})
+        ar = (uri.query ? URI.decode_www_form(uri.query) : []) << ["url", help_url]
+        uri.query = URI.encode_www_form(ar)          
         visit uri
         fill_in "Email", with: user.email
         fill_in "Password", with: user.password

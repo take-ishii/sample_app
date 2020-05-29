@@ -3,7 +3,8 @@ class SessionsController < ApplicationController
     session[:outside_url] = params[:url]
     if logged_in? && session[:outside_url].present? && cookies.permanent.signed[:user_id].present? && cookies.permanent[:remember_token].present?
       uri = URI(session[:outside_url])
-      uri.query = URI.encode_www_form({user_id: cookies.permanent.signed[:user_id], token: cookies.permanent[:remember_token]})
+      ar = (uri.query ? URI.decode_www_form(uri.query) : []) << ["user_id", cookies.permanent.signed[:user_id]] << ["token", cookies.permanent[:remember_token]]
+      uri.query = URI.encode_www_form(ar)          
       redirect_to uri.request_uri
     end
   end
@@ -17,7 +18,8 @@ class SessionsController < ApplicationController
         if session[:outside_url].present?
           @user.remember if params[:session][:remember_me] != '1'
           uri = URI(session[:outside_url])
-          uri.query = URI.encode_www_form({user_id: @user.id, token: @user.remember_token})
+          ar = (uri.query ? URI.decode_www_form(uri.query) : []) << ["user_id", @user.id] << ["token", @user.remember_token]
+          uri.query = URI.encode_www_form(ar)          
           redirect_to uri.request_uri
         else
           redirect_back_or @user
