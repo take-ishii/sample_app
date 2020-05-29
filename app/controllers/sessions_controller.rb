@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
         if session[:outside_url].present?
           @user.remember if params[:session][:remember_me] != '1'
           uri = update_uri(session[:outside_url], user_id: @user.id, token: @user.remember_token)         
-          redirect_to uri.request_uri
+          redirect_to uri
         else
           redirect_back_or @user
         end
