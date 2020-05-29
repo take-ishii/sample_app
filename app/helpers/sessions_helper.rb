@@ -64,6 +64,6 @@ module SessionsHelper
     query = uri.query ? URI.decode_www_form(uri.query) : []
     query = query.concat(params.to_a)
     uri.query = URI.encode_www_form(query)
-    uri.request_uri
+    uri
   end  
 end
