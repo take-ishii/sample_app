@@ -182,9 +182,9 @@
 #### HTTPメソッド
 - GET
 
-#### HTTPリクエストヘッダー
+#### リクエストヘッダー
 - Authorization
-  - remember_tokenが入っている
+  - remember_tokenを受け取る
 
 #### リクエストヘッダ
 
