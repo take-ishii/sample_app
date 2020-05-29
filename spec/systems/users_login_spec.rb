@@ -58,7 +58,7 @@ RSpec.describe 'UsersLogin', type: :system do
         end
         
         scenario "リダイレクトURLが指定したURLであること" do
-          expect(page).to have_current_path(help_url, ignore_query: true)
+          expect(page).to have_current_path(help_path, ignore_query: true)
         end
         scenario "user_idとtokenがURLに含まれていること" do
           query_hash = Rack::Utils.parse_nested_query(URI.parse(current_url).query)
@@ -78,7 +78,7 @@ RSpec.describe 'UsersLogin', type: :system do
         end
         
         scenario "リダイレクトURLが指定したURLであること" do
-          expect(page).to have_current_path(help_url, ignore_query: true)
+          expect(page).to have_current_path(help_path, ignore_query: true)
         end
         scenario "user_idとtokenがURLに含まれていること" do
           query_hash = Rack::Utils.parse_nested_query(URI.parse(current_url).query)
@@ -98,7 +98,7 @@ RSpec.describe 'UsersLogin', type: :system do
       end
       
       scenario "リダイレクトURLが指定したURLであること" do
-        expect(page).to have_current_path(help_url, ignore_query: true)
+        expect(page).to have_current_path(help_path, ignore_query: true)
       end
       scenario "user_idとtokenがURLに含まれていること" do
         query_hash = Rack::Utils.parse_nested_query(URI.parse(current_url).query)
