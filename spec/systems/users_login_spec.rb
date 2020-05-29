@@ -56,6 +56,10 @@ RSpec.describe 'UsersLogin', type: :system do
           uri.query = URI.encode_www_form({url: help_url})      
           visit uri
         end
+        after do
+          # FIXME: visitしないとCookieが消えずログイン状態が引き継がれる
+          visit root_url
+        end
         
         scenario "リダイレクトURLが指定したURLであること" do
           expect(page).to have_current_path(help_path, ignore_query: true)
@@ -75,6 +79,10 @@ RSpec.describe 'UsersLogin', type: :system do
           fill_in "Email", with: user.email
           fill_in "Password", with: user.password
           click_button "Log in"
+        end
+        after do
+          # FIXME: visitしないとCookieが消えずログイン状態が引き継がれる
+          visit root_url
         end
         
         scenario "リダイレクトURLが指定したURLであること" do
@@ -96,7 +104,11 @@ RSpec.describe 'UsersLogin', type: :system do
         fill_in "Password", with: user.password
         click_button "Log in"
       end
-      
+      after do
+        # FIXME: visitしないとCookieが消えずログイン状態が引き継がれる
+        visit root_url
+      end
+        
       scenario "リダイレクトURLが指定したURLであること" do
         expect(page).to have_current_path(help_path, ignore_query: true)
       end
