@@ -21,6 +21,7 @@ group :development, :test do
   gem 'byebug',  '9.0.6', platform: :mri
   gem 'factory_bot_rails'
   gem 'shoulda-matchers'
+  gem 'show_me_the_cookies'
 end
 
 group :development do

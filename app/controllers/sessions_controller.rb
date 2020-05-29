@@ -1,5 +1,10 @@
 class SessionsController < ApplicationController
   def new
+    session[:outside_url] = params[:url]
+    if logged_in? && session[:outside_url].present? && cookies.permanent.signed[:user_id].present? && cookies.permanent[:remember_token].present?
+      uri = update_uri(session[:outside_url], user_id: cookies.permanent.signed[:user_id], token: cookies.permanent[:remember_token])
+      redirect_to uri
+    end
   end
   
   def create
@@ -8,7 +13,13 @@ class SessionsController < ApplicationController
       if @user.activated?
         log_in @user
         params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
-        redirect_back_or @user
+        if session[:outside_url].present?
+          @user.remember if params[:session][:remember_me] != '1'
+          uri = update_uri(session[:outside_url], user_id: @user.id, token: @user.remember_token)         
+          redirect_to uri
+        else
+          redirect_back_or @user
+        end
       else
         message  = "Account not activated. "
         message += "Check your email for the activation link."
