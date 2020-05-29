@@ -187,7 +187,10 @@
   - type
     - `Token`
   - credentials
-    - remember_tokenを載せる
+    - remember_tokenを記載
+  - 例
+    `Authorization: "Token HogehogeToken"`
+
 
 #### リクエストヘッダ
 
