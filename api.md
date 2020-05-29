@@ -184,7 +184,10 @@
 
 #### リクエストヘッダー
 - Authorization
-  - remember_tokenを受け取る
+  - type
+    - `Token`
+  - credentials
+    - remember_tokenを載せる
 
 #### リクエストヘッダ
 
