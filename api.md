@@ -182,7 +182,11 @@
 #### HTTPメソッド
 - GET
 
-#### リクエストヘッダー
+#### リクエストヘッダ
+
+- Content-Type (required)
+  - 常に `application/json` とする
+
 - Authorization
   - type
     - `Token`
@@ -190,12 +194,6 @@
     - remember_tokenを記載
   - 例
     `Authorization: "Token HogehogeToken"`
-
-
-#### リクエストヘッダ
-
-- Content-Type (required)
-  - 常に `application/json` とする
 
 #### 入力（リクエスト）
 - user_id(Integer, required)
