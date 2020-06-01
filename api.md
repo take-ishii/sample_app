@@ -182,9 +182,15 @@
 #### HTTPメソッド
 - GET
 
-#### HTTPリクエストヘッダー
+#### リクエストヘッダー
 - Authorization
-  - remember_tokenが入っている
+  - type
+    - `Token`
+  - credentials
+    - remember_tokenを記載
+  - 例
+    `Authorization: "Token HogehogeToken"`
+
 
 #### リクエストヘッダ
 
