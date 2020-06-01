@@ -97,6 +97,14 @@
 - Content-Type (required)
   - 常に `application/json` とする
 
+- Authorization
+  - type
+    - `Token`
+  - credentials
+    - remember_tokenを記載
+  - 例
+    `Authorization: "Token HogehogeToken"`
+
 #### 入力（リクエスト）
 - user_id(Integer, required)
   - フォローする側のユーザーID
