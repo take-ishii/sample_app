@@ -25,5 +25,22 @@ RSpec.describe 'Relationships', type: :request do
         expect(json["followed"]).to be true
       end
     end
+
+    context `available requests and already followed` do
+      before do
+        Micropost.create(follower_id: user.id, followed_id: other_user.id)
+        post '/api/v1/relationships', params: { user_id: user.id, followed_id: other_user.id },
+                                      headers: { Authorization: "Token #{remember_token}" }
+      end
+      it `returns 200` do
+        expect(response.status).to eq 200
+      end
+      it `is logged in` do
+        expect(json["is_logged_in"]).to be true
+      end
+      it `is already followed` do
+        expect(json["followed"]).to be false
+      end
+    end
   end
 end
