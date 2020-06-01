@@ -1,7 +1,7 @@
 module Api
   module V1
     module Relationships
-      class FollowValidationController < ApplicationController
+      class RelationshipsController < ApplicationController
         
       end
     end
