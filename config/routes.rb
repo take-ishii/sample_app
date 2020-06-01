@@ -33,7 +33,9 @@ Rails.application.routes.draw do
           resources :microposts,  only: [:index]
         end
       end
-      resources :relationships, only: [:create]
+      scope module: :relationships do
+        resources :relationships, only: [:create]
+      end
     end
   end
 end
