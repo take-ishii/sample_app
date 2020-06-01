@@ -74,5 +74,21 @@ RSpec.describe 'Relationships', type: :request do
         expect(json["followed"]).to be false
       end
     end
+
+    context `available user_id and unavailable followed_id` do
+      before do
+        post '/api/v1/relationships', params: { user_id: user.id, followed_id: other_user.id },
+                                      headers: { Authorization: "Token #{remember_token}" }
+      end
+      it `returns 404` do
+        expect(response.status).to eq 404
+      end
+      it `is logged in` do
+        expect(json["is_logged_in"]).to be true
+      end
+      it `is not followed` do
+        expect(json["followed"]).to be false
+      end
+    end
   end
 end
