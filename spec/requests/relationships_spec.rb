@@ -13,7 +13,7 @@ RSpec.describe 'Relationships', type: :request do
 
     context `post available requests to followAPI` do
       it `is successful to SessionValidation API` do
-        get "/api/v1/users/#{user.id}/session_validations", headers: { Authorization: "Token token=#{remember_token}" }
+        get "/api/v1/users/#{user.id}/session_validations", headers: { Authorization: "Token #{remember_token}" }
         expect(response.status).to eq(200)
       end
       context 'successful to follow' do
@@ -52,7 +52,7 @@ RSpec.describe 'Relationships', type: :request do
 
     context `unavailable user_id` do
       it `is unsuccessful to SessionValidation API` do
-        get "/api/v1/users/#{not_member.id}/session_validations", headers: { Authorization: "Token token=#{remember_token}" }
+        get "/api/v1/users/#{not_member.id}/session_validations", headers: { Authorization: "Token #{remember_token}" }
         expect(response.status).to eq(401)
       end
       context `unsuccessful to follow` do
@@ -74,13 +74,13 @@ RSpec.describe 'Relationships', type: :request do
 
     context `unavailable token` do
       it `is unsuccessful to SessionValidation API` do
-        get "/api/v1/users/#{user.id}/session_validations", headers: { Authorization: 'Token token=MistakeToken' }
+        get "/api/v1/users/#{user.id}/session_validations", headers: { Authorization: "Token MistakeToken" }
         expect(response.status).to eq(401)
       end
       context `unsuccessful to follow` do
         before do
           post '/api/v1/relationships', params: { user_id: user.id, followed_id: other_user.id },
-                                        headers: { Authorization: 'Token MistakeToken' }
+                                        headers: { Authorization: "Token MistakeToken" }
         end
         it `returns 401` do
           expect(response.status).to eq 401
@@ -96,7 +96,7 @@ RSpec.describe 'Relationships', type: :request do
 
     context `unavailable followed_id` do
       it `is successful to SessionValidation API` do
-        get "/api/v1/users/#{user.id}/session_validations", headers: { Authorization: "Token token=#{remember_token}" }
+        get "/api/v1/users/#{user.id}/session_validations", headers: { Authorization: "Token #{remember_token}" }
         expect(response.status).to eq(200)
       end
       context `unsuccessful to follow` do
