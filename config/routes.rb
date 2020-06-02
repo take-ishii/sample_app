@@ -33,7 +33,7 @@ Rails.application.routes.draw do
           resources :microposts,  only: [:index]
         end
       end
-      scope module: :relationships do
+      namespace :users do
         resources :relationships, only: [:create]
       end
     end
