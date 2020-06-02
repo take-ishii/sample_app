@@ -14,7 +14,7 @@ RSpec.describe 'Relationships', type: :request do
       context 'successful to follow' do
         before do
           post '/api/v1/users/relationships', params: { user_id: user.id, followed_id: other_user.id },
-                                        headers: { Authorization: "Token #{remember_token}" }
+                                              headers: { Authorization: "Token #{remember_token}" }
         end
         it `returns 200` do
           expect(response.status).to eq 200
@@ -31,7 +31,7 @@ RSpec.describe 'Relationships', type: :request do
         before do
           Relationship.create(follower_id: user.id, followed_id: other_user.id)
           post '/api/v1/users/relationships', params: { user_id: user.id, followed_id: other_user.id },
-                                        headers: { Authorization: "Token #{remember_token}" }
+                                              headers: { Authorization: "Token #{remember_token}" }
         end
         it `returns 200` do
           expect(response.status).to eq 200
@@ -45,14 +45,13 @@ RSpec.describe 'Relationships', type: :request do
       end
     end
 
-
     context `unsuccessful to follow` do
       let!(:not_member) { User.new(id: 999, name: 'not_member', email: 'not_member@example.com', remember_digest: User.digest(remember_token)) }
-      
+
       context `unavailable user_id` do
         before do
           post '/api/v1/users/relationships', params: { user_id: not_member.id, followed_id: other_user.id },
-                                        headers: { Authorization: "Token #{remember_token}" }
+                                              headers: { Authorization: "Token #{remember_token}" }
         end
         it `returns 401` do
           expect(response.status).to eq 401
@@ -68,7 +67,7 @@ RSpec.describe 'Relationships', type: :request do
       context `unavailable token` do
         before do
           post '/api/v1/users/relationships', params: { user_id: user.id, followed_id: other_user.id },
-                                        headers: { Authorization: "Token MistakeToken" }
+                                              headers: { Authorization: 'Token MistakeToken' }
         end
         it `returns 401` do
           expect(response.status).to eq 401
@@ -84,7 +83,7 @@ RSpec.describe 'Relationships', type: :request do
       context `unavailable followed_id` do
         before do
           post '/api/v1/users/relationships', params: { user_id: user.id, followed_id: not_member.id },
-                                        headers: { Authorization: "Token #{remember_token}" }
+                                              headers: { Authorization: "Token #{remember_token}" }
         end
         it `returns 404` do
           expect(response.status).to eq 404
