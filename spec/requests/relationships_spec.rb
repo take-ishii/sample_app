@@ -12,10 +12,6 @@ RSpec.describe 'Relationships', type: :request do
     subject(:json) { JSON.parse(response.body) }
 
     context `post available requests to followAPI` do
-      it `is successful to SessionValidation API` do
-        get "/api/v1/users/#{user.id}/session_validations", headers: { Authorization: "Token #{remember_token}" }
-        expect(response.status).to eq(200)
-      end
       context 'successful to follow' do
         before do
           post '/api/v1/relationships', params: { user_id: user.id, followed_id: other_user.id },
@@ -50,12 +46,9 @@ RSpec.describe 'Relationships', type: :request do
       end
     end
 
-    context `unavailable user_id` do
-      it `is unsuccessful to SessionValidation API` do
-        get "/api/v1/users/#{not_member.id}/session_validations", headers: { Authorization: "Token #{remember_token}" }
-        expect(response.status).to eq(401)
-      end
-      context `unsuccessful to follow` do
+
+    context `unsuccessful to follow` do
+      context `unavailable user_id` do
         before do
           post '/api/v1/relationships', params: { user_id: not_member.id, followed_id: other_user.id },
                                         headers: { Authorization: "Token #{remember_token}" }
@@ -70,14 +63,8 @@ RSpec.describe 'Relationships', type: :request do
           expect(json['followed']).to be false
         end
       end
-    end
 
-    context `unavailable token` do
-      it `is unsuccessful to SessionValidation API` do
-        get "/api/v1/users/#{user.id}/session_validations", headers: { Authorization: "Token MistakeToken" }
-        expect(response.status).to eq(401)
-      end
-      context `unsuccessful to follow` do
+      context `unavailable token` do
         before do
           post '/api/v1/relationships', params: { user_id: user.id, followed_id: other_user.id },
                                         headers: { Authorization: "Token MistakeToken" }
@@ -92,14 +79,8 @@ RSpec.describe 'Relationships', type: :request do
           expect(json['followed']).to be false
         end
       end
-    end
 
-    context `unavailable followed_id` do
-      it `is successful to SessionValidation API` do
-        get "/api/v1/users/#{user.id}/session_validations", headers: { Authorization: "Token #{remember_token}" }
-        expect(response.status).to eq(200)
-      end
-      context `unsuccessful to follow` do
+      context `unavailable followed_id` do
         before do
           post '/api/v1/relationships', params: { user_id: user.id, followed_id: not_member.id },
                                         headers: { Authorization: "Token #{remember_token}" }
