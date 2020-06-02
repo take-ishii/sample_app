@@ -33,7 +33,7 @@ RSpec.describe 'Relationships', type: :request do
 
       context `already followed` do
         before do
-          Micropost.create(follower_id: user.id, followed_id: other_user.id)
+          Relationship.create(follower_id: user.id, followed_id: other_user.id)
           post '/api/v1/relationships', params: { user_id: user.id, followed_id: other_user.id },
                                         headers: { Authorization: "Token #{remember_token}" }
         end
