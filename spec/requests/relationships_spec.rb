@@ -8,7 +8,7 @@ RSpec.describe 'Relationships', type: :request do
     before do
       user.update_attribute(:remember_digest, User.digest(remember_token))
     end
-    subject(:json) { JSON.parse(response.body) }
+    subject(:response_json) { JSON.parse(response.body) }
 
     context `post available requests to followAPI` do
       context 'successful to follow' do
@@ -20,10 +20,10 @@ RSpec.describe 'Relationships', type: :request do
           expect(response.status).to eq 200
         end
         it `is logged in` do
-          expect(json['is_logged_in']).to be true
+          expect(response_json['is_logged_in']).to be true
         end
         it `is successful to follow` do
-          expect(json['followed']).to be true
+          expect(response_json['followed']).to be true
         end
       end
 
@@ -37,10 +37,10 @@ RSpec.describe 'Relationships', type: :request do
           expect(response.status).to eq 200
         end
         it `is logged in` do
-          expect(json['is_logged_in']).to be true
+          expect(response_json['is_logged_in']).to be true
         end
         it `is already followed` do
-          expect(json['followed']).to be false
+          expect(response_json['followed']).to be false
         end
       end
     end
@@ -58,10 +58,10 @@ RSpec.describe 'Relationships', type: :request do
           expect(response.status).to eq 401
         end
         it `is not logged in` do
-          expect(json['is_logged_in']).to be false
+          expect(response_json['is_logged_in']).to be false
         end
         it `is not followed` do
-          expect(json['followed']).to be false
+          expect(response_json['followed']).to be false
         end
       end
 
@@ -74,10 +74,10 @@ RSpec.describe 'Relationships', type: :request do
           expect(response.status).to eq 401
         end
         it `is not logged in` do
-          expect(json['is_logged_in']).to be false
+          expect(response_json['is_logged_in']).to be false
         end
         it `is not followed` do
-          expect(json['followed']).to be false
+          expect(response_json['followed']).to be false
         end
       end
 
@@ -90,10 +90,10 @@ RSpec.describe 'Relationships', type: :request do
           expect(response.status).to eq 404
         end
         it `is logged in` do
-          expect(json['is_logged_in']).to be true
+          expect(response_json['is_logged_in']).to be true
         end
         it `is not followed` do
-          expect(json['followed']).to be false
+          expect(response_json['followed']).to be false
         end
       end
     end
