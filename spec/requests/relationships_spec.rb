@@ -50,19 +50,25 @@ RSpec.describe 'Relationships', type: :request do
       end
     end
 
-    context `unavailable user_id and available followed_id` do
-      before do
-        post '/api/v1/relationships', params: { user_id: 999, followed_id: other_user.id },
-                                      headers: { Authorization: "Token #{remember_token}" }
+    context `unavailable user_id` do
+      it `is unsuccessful to SessionValidation API` do
+        get "/api/v1/users/#{not_member.id}/session_validations", headers: { Authorization: "Token token=#{remember_token}" }
+        expect(response.status).to eq(401)
       end
-      it `returns 401` do
-        expect(response.status).to eq 401
-      end
-      it `is not logged in` do
-        expect(json['is_logged_in']).to be false
-      end
-      it `is not followed` do
-        expect(json['followed']).to be false
+      context `unsuccessful to follow` do
+        before do
+          post '/api/v1/relationships', params: { user_id: not_member.id, followed_id: other_user.id },
+                                        headers: { Authorization: "Token #{remember_token}" }
+        end
+        it `returns 401` do
+          expect(response.status).to eq 401
+        end
+        it `is not logged in` do
+          expect(json['is_logged_in']).to be false
+        end
+        it `is not followed` do
+          expect(json['followed']).to be false
+        end
       end
     end
 
