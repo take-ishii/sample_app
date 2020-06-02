@@ -4,7 +4,6 @@ RSpec.describe 'Relationships', type: :request do
   describe `create` do
     let!(:user) { create(:user) }
     let!(:other_user) { create(:other_user) }
-    let!(:not_member) { User.new(id: 999, name: 'not_member', email: 'not_member@example.com', remember_digest: User.digest(remember_token)) }
     let(:remember_token) { 'hogehoge' }
     before do
       user.update_attribute(:remember_digest, User.digest(remember_token))
@@ -48,6 +47,8 @@ RSpec.describe 'Relationships', type: :request do
 
 
     context `unsuccessful to follow` do
+      let!(:not_member) { User.new(id: 999, name: 'not_member', email: 'not_member@example.com', remember_digest: User.digest(remember_token)) }
+      
       context `unavailable user_id` do
         before do
           post '/api/v1/relationships', params: { user_id: not_member.id, followed_id: other_user.id },
