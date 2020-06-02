@@ -10,7 +10,7 @@ RSpec.describe 'Relationships', type: :request do
     end
     subject(:json) { JSON.parse(response.body) }
 
-    context `available requests` do
+    context `post available requests to followAPI` do
       it `is successful to SessionValidation API` do
         get "/api/v1/users/#{user.id}/session_validations", headers: { Authorization: "Token token=#{remember_token}" }
         expect(response.status).to eq(200)
@@ -33,7 +33,7 @@ RSpec.describe 'Relationships', type: :request do
 
       context `already followed` do
         before do
-          Relationship.create(follower_id: user.id, followed_id: other_user.id)
+          Micropost.create(follower_id: user.id, followed_id: other_user.id)
           post '/api/v1/relationships', params: { user_id: user.id, followed_id: other_user.id },
                                         headers: { Authorization: "Token #{remember_token}" }
         end
