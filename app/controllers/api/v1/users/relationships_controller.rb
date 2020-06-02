@@ -1,6 +1,6 @@
 module Api
   module V1
-    module Relationships
+    module Users
       class RelationshipsController < ApplicationController
         def create
           
