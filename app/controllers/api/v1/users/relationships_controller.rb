@@ -13,6 +13,18 @@ module Api
           if request_session_validations(params[:user_id]) == '401'
             return render json: { "status": '401', "is_logged_in": 'false', "followed": 'false' }, status: 401
           end
+
+          user = User.find_by(id: params[:user_id])
+          if followed_user = User.find_by(id: params[:followed_id])
+            if user.following?(followed_user)
+              render json: { "status": '200', "is_logged_in": 'true', "followed": 'false' }, status: 200
+            else
+              user.follow(followed_user)
+              render json: { "status": '200', "is_logged_in": 'true', "followed": 'true' }, status: 200
+            end
+          else
+            render json: { "status": '404', "is_logged_in": 'true', "followed": 'false' }, status: 404
+          end
         end
 
         private
