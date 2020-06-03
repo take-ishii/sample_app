@@ -13,7 +13,7 @@ RSpec.describe 'Relationships', type: :request do
     context `post available requests to followAPI` do
       context 'successful to follow' do
         before do
-          post '/api/v1/users/relationships', params: { user_id: user.id, followed_id: other_user.id },
+          post "/api/v1/users/#{user.id}/relationships", params: { followed_id: other_user.id },
                                               headers: { Authorization: "Token #{remember_token}" }
         end
         it `returns 200` do
@@ -30,7 +30,7 @@ RSpec.describe 'Relationships', type: :request do
       context `already followed` do
         before do
           Relationship.create(follower_id: user.id, followed_id: other_user.id)
-          post '/api/v1/users/relationships', params: { user_id: user.id, followed_id: other_user.id },
+          post "/api/v1/users/#{user.id}/relationships", params: { followed_id: other_user.id },
                                               headers: { Authorization: "Token #{remember_token}" }
         end
         it `returns 200` do
@@ -50,7 +50,7 @@ RSpec.describe 'Relationships', type: :request do
 
       context `unavailable user_id` do
         before do
-          post '/api/v1/users/relationships', params: { user_id: not_member.id, followed_id: other_user.id },
+          post "/api/v1/users/#{not_member.id}/relationships", params: { followed_id: other_user.id },
                                               headers: { Authorization: "Token #{remember_token}" }
         end
         it `returns 401` do
@@ -66,7 +66,7 @@ RSpec.describe 'Relationships', type: :request do
 
       context `unavailable token` do
         before do
-          post '/api/v1/users/relationships', params: { user_id: user.id, followed_id: other_user.id },
+          post "/api/v1/users/#{user.id}/relationships", params: { followed_id: other_user.id },
                                               headers: { Authorization: 'Token MistakeToken' }
         end
         it `returns 401` do
@@ -82,7 +82,7 @@ RSpec.describe 'Relationships', type: :request do
 
       context `unavailable followed_id` do
         before do
-          post '/api/v1/users/relationships', params: { user_id: user.id, followed_id: not_member.id },
+          post "/api/v1/users/#{user.id}/relationships", params: { followed_id: not_member.id },
                                               headers: { Authorization: "Token #{remember_token}" }
         end
         it `returns 404` do
