@@ -87,7 +87,7 @@
 - クライアント側でフォローボタンが押された際にフォローする
 
 #### URI
-- /api/v1/relationships
+- /api/v1/users/{user_id}/relationships
 
 #### HTTPメソッド
 - POST
