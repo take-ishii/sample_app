@@ -31,10 +31,8 @@ Rails.application.routes.draw do
         scope module: :users do
           get '/session_validations', to: 'session_validations#index'
           resources :microposts,  only: [:index]
+          resources :relationships, only: [:create]
         end
-      end
-      namespace :users do
-        resources :relationships, only: [:create]
       end
     end
   end
