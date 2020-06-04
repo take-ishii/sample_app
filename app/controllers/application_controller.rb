@@ -12,4 +12,11 @@ class ApplicationController < ActionController::Base
         redirect_to login_url
       end
     end
+
+    def logged_in_authorization?(user_id)
+      user = User.find_by(id: user_id)
+      authenticate_with_http_token do |token, _options|
+        return user && user.authenticated?(:remember, token)
+      end
+    end
 end
