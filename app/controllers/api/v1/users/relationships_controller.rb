@@ -6,7 +6,6 @@ module Api
   module V1
     module Users
       class RelationshipsController < ApplicationController
-        # createに対してのCSRF対策がオフになってない可能性があるので、デプロイ後の検証で引っかかったらここをチェック
         protect_from_forgery except: :create
 
         def create
