@@ -20,10 +20,10 @@ RSpec.describe 'Relationships', type: :request do
           expect(response.status).to eq 200
         end
         it `is logged in` do
-          expect(response_json['is_logged_in']).to eq "true"
+          expect(response_json['is_logged_in']).to be true
         end
         it `is successful to follow` do
-          expect(response_json['followed']).to eq "true"
+          expect(response_json['followed']).to be true
         end
       end
 
@@ -37,10 +37,10 @@ RSpec.describe 'Relationships', type: :request do
           expect(response.status).to eq 200
         end
         it `is logged in` do
-          expect(response_json['is_logged_in']).to eq "true"
+          expect(response_json['is_logged_in']).to be true
         end
         it `is already followed` do
-          expect(response_json['followed']).to eq "false"
+          expect(response_json['followed']).to be false
         end
       end
     end
@@ -57,10 +57,10 @@ RSpec.describe 'Relationships', type: :request do
           expect(response.status).to eq 401
         end
         it `is not logged in` do
-          expect(response_json['is_logged_in']).to eq "false"
+          expect(response_json['is_logged_in']).to be false
         end
         it `is not followed` do
-          expect(response_json['followed']).to eq "false"
+          expect(response_json['followed']).to be false
         end
       end
 
@@ -73,10 +73,10 @@ RSpec.describe 'Relationships', type: :request do
           expect(response.status).to eq 401
         end
         it `is not logged in` do
-          expect(response_json['is_logged_in']).to eq "false"
+          expect(response_json['is_logged_in']).to be false
         end
         it `is not followed` do
-          expect(response_json['followed']).to eq "false"
+          expect(response_json['followed']).to be false
         end
       end
 
@@ -89,10 +89,10 @@ RSpec.describe 'Relationships', type: :request do
           expect(response.status).to eq 404
         end
         it `is logged in` do
-          expect(response_json['is_logged_in']).to eq "true"
+          expect(response_json['is_logged_in']).to be true
         end
         it `is not followed` do
-          expect(response_json['followed']).to eq "false"
+          expect(response_json['followed']).to be false
         end
       end
     end
