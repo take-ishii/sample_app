@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def logged_in_authorization?(user_id)
+    def valid_authorization_session?(user_id)
       user = User.find_by(id: user_id)
       authenticate_with_http_token do |token, _options|
         return user && user.authenticated?(:remember, token)

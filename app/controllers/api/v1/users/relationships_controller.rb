@@ -9,7 +9,7 @@ module Api
         protect_from_forgery except: :create
 
         def create
-          if !logged_in_authorization?(params[:user_id])
+          if !valid_authorization_session?(params[:user_id])
             return render json: { "status": '401', "is_logged_in": 'false', "followed": 'false' }, status: 401
           end
 
