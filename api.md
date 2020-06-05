@@ -115,14 +115,14 @@
 
 #### 出力（レスポンス）
 - 出力データ詳細
-  - ステータス(String, required)
+  - ステータス(String)
     - 200：正常にレスポンスできた時
     - 401：認証失敗した時
     - 404：リクエストしたリソースが存在しない時
-  - is_logged_in(Boolean, required)
+  - is_logged_in(Boolean)
     - true：ログインしている
     - false：ログインしていない
-  - followed(Boolean, required)
+  - followed(Boolean)
     - true：フォロー成功
     - false：フォロー失敗・すでにフォローしている
 
