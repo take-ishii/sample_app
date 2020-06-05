@@ -113,7 +113,6 @@
 - token(token, required)
   - ログインページから持ってきて保存してあった認証トークン
 
-
 #### 出力（レスポンス）
 - 出力データ詳細
   - ステータス(String, required)
@@ -124,24 +123,6 @@
     - ログインしているかどうか
   - followed(Boolean, required)
     - フォローできたかどうか
-
-- 正常時（ステータス：200）
-  - フォロー成功時
-    - followed：true
-    - is_logged_in：true
-  - 既にフォローしている時
-    - followed：false
-    - is_logged_in：true
-
-- エラー時
-  - user_idが存在しない・tokenが一致せずログインに失敗した時
-    - ステータス：401
-    - followed：false
-    - is_logged_in：false
-  - followed_idが存在しない
-    - ステータス：404
-    - is_logged_in：true
-    - followed：false
 
 #### JSONの例
 - 正常時
