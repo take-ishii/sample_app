@@ -113,36 +113,25 @@
 - token(token, required)
   - ログインページから持ってきて保存してあった認証トークン
 
-
 #### 出力（レスポンス）
-- 出力データ詳細
+- 出力データ
   - ステータスコード
-    - 200：正常にレスポンスできたとき
+  - is_logged_in
+    - ログインしているかどうか
+  - followed
+    - フォローできたかどうか
+
+- 出力データ詳細
+  - ステータス(String)
+    - 200：正常にレスポンスできた時
     - 401：認証失敗した時
     - 404：リクエストしたリソースが存在しない時
-  - データ
-    - is_logged_in
-      - ログインしているかどうか
-    - followed
-      - フォローできたかどうか
-
-- 正常時（ステータス：200）
-  - フォロー成功時
-    - followed：true
-    - is_logged_in：true
-  - 既にフォローしている時
-    - followed：false
-    - is_logged_in：true
-
-- エラー時
-  - user_idが存在しない・tokenが一致せずログインに失敗した時
-    - ステータス：401
-    - followed：false
-    - is_logged_in：false
-  - followed_idが存在しない
-    - ステータス：404
-    - is_logged_in：true
-    - followed：false
+  - is_logged_in(Boolean)
+    - true：ログインしている
+    - false：ログインしていない
+  - followed(Boolean)
+    - true：フォロー成功
+    - false：フォロー失敗・すでにフォローしている
 
 #### JSONの例
 - 正常時
@@ -179,46 +168,3 @@
       "followed": "false",
     }
     ```
-
-### ログインバリデーションAPI
-#### 概要
-- ユーザーがログインしているかを確認するAPI
-
-#### URI
-- /api/v1/users/{user_id}/session_validations
-
-#### HTTPメソッド
-- GET
-
-#### リクエストヘッダ
-
-- Content-Type (required)
-  - 常に `application/json` とする
-
-- Authorization
-  - type
-    - `Token`
-  - credentials
-    - remember_tokenを記載
-  - 例
-    `Authorization: "Token HogehogeToken"`
-
-#### 入力（リクエスト）
-- user_id(Integer, required)
-  - ログインしているユーザーID
-- token(token, required)
-  - 認証トークン
-
-#### 出力（レスポンス）
-- 出力データ詳細
-  - ステータスコード
-    - 200：正常にレスポンスできたとき
-    - 401：認証失敗した時
-
-- 正常時
-  - ログイン成功時
-    - ステータス：200
-
-- エラー時
-  - user_idが存在しない・tokenが不一致の時
-    - ステータスコード：401
