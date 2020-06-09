@@ -1,7 +1,7 @@
 require 'capybara/rspec'
+require 'webmock/rspec'
 
 RSpec.configure do |config|
-
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
@@ -16,4 +16,19 @@ RSpec.configure do |config|
     driven_by :selenium_chrome_headless
   end
 
+  config.before(:each) do
+    WebMock.allow_net_connect!
+    stub_request(:get, 'http://localhost:3000/api/v1/users/1/session_validations').with(
+      headers: { Authorization: 'Token hogehoge' }).to_return(
+        status: 200
+    )
+    stub_request(:get, 'http://localhost:3000/api/v1/users/1/session_validations').with(
+      headers: { Authorization: 'Token MistakeToken' }).to_return(
+        status: 401
+    )
+    stub_request(:get, 'http://localhost:3000/api/v1/users/999/session_validations').with(
+      headers: { Authorization: 'Token hogehoge' }).to_return(
+        status: 401
+    )
+  end
 end

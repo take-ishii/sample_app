@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Relationships', type: :request do
-  xdescribe `create` do
+  describe `create` do
     let!(:user) { create(:user) }
     let!(:other_user) { create(:other_user) }
     let(:remember_token) { 'hogehoge' }
