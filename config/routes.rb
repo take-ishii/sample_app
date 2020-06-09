@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       resources :users do
         scope module: :users do
           resources :microposts,  only: [:index]
+          resources :relationships, only: [:create]
         end
       end
     end
