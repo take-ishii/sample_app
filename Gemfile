@@ -22,6 +22,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'shoulda-matchers'
   gem 'webmock'
+  gem 'show_me_the_cookies'
 end
 
 group :development do

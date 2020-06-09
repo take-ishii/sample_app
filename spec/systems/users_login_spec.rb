@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'uri'
 
 RSpec.describe 'UsersLogin', type: :system do
   include_context "setup"
@@ -6,7 +7,7 @@ RSpec.describe 'UsersLogin', type: :system do
   subject { page }
   let(:not_active_user) { create(:other_user, activated: false) }
 
-  describe "login" do
+  describe "内部からのログイン" do
     before { visit "/login" }
 
     context "ログインの値が有効の場合" do
@@ -44,7 +45,81 @@ RSpec.describe 'UsersLogin', type: :system do
       end
     end
   end
-
+  
+  describe "外部からのログイン" do
+    let(:user) { create(:user) }
+    context "ログインしている場合" do
+      context "cookieにidとtokenが保存されている場合" do
+        before do
+          valid_remember_login(user)
+          uri = URI(login_url)
+          uri.query = URI.encode_www_form({url: help_url})      
+          visit uri
+        end
+        after do
+          # FIXME: visitしないとCookieが消えずログイン状態が引き継がれる
+          visit root_url
+        end
+        
+        scenario "リダイレクトURLが指定したURLであること" do
+          expect(page).to have_current_path(help_url, ignore_query: true)
+        end
+        scenario "user_idとtokenがURLに含まれていること" do
+          query_hash = Rack::Utils.parse_nested_query(URI.parse(current_url).query)
+          expect(query_hash['user_id']).to_not be_empty
+          expect(query_hash['token']).to_not be_empty
+        end
+      end
+      context "cookieにidとtokenが保存されていない場合" do
+        before do
+          valid_login(user)
+          uri = URI(login_url)
+          uri.query = URI.encode_www_form({url: help_url})              
+          visit uri
+          fill_in "Email", with: user.email
+          fill_in "Password", with: user.password
+          click_button "Log in"
+        end
+        after do
+          # FIXME: visitしないとCookieが消えずログイン状態が引き継がれる
+          visit root_url
+        end
+        
+        scenario "リダイレクトURLが指定したURLであること" do
+          expect(page).to have_current_path(help_path, ignore_query: true)
+        end
+        scenario "user_idとtokenがURLに含まれていること" do
+          query_hash = Rack::Utils.parse_nested_query(URI.parse(current_url).query)
+          expect(query_hash['user_id']).to_not be_empty
+          expect(query_hash['token']).to_not be_empty
+        end
+      end
+    end
+    context "ログインしていない場合" do
+      before do
+        uri = URI(login_url)
+        uri.query = URI.encode_www_form({url: help_url})               
+        visit uri
+        fill_in "Email", with: user.email
+        fill_in "Password", with: user.password
+        click_button "Log in"
+      end
+      after do
+        # FIXME: visitしないとCookieが消えずログイン状態が引き継がれる
+        visit root_url
+      end
+        
+      scenario "リダイレクトURLが指定したURLであること" do
+        expect(page).to have_current_path(help_path, ignore_query: true)
+      end
+      scenario "user_idとtokenがURLに含まれていること" do
+        query_hash = Rack::Utils.parse_nested_query(URI.parse(current_url).query)
+        expect(query_hash['user_id']).to_not be_empty
+        expect(query_hash['token']).to_not be_empty
+      end
+    end
+  end
+  
   describe "logout" do
     scenario "正常にログアウトできること" do
       valid_login(user)

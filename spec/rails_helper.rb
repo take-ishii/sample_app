@@ -20,6 +20,7 @@ RSpec.configure do |config|
   config.include TestHelper #作成したヘルパーを追加
   config.include LoginSupport
   config.include SupportModule
+  config.include ShowMeTheCookies, :type => :system
   
   config.use_transactional_fixtures = true
 

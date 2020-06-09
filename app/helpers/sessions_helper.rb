@@ -58,4 +58,12 @@ module SessionsHelper
   def store_location
     session[:forwarding_url] = request.original_url if request.get? # request.original_urlでリクエスト先を取得
   end
+  
+  def update_uri(uri, **params)
+    uri = URI(uri)
+    query = uri.query ? URI.decode_www_form(uri.query) : []
+    query = query.concat(params.to_a)
+    uri.query = URI.encode_www_form(query)
+    uri
+  end  
 end
