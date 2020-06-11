@@ -1,0 +1,6 @@
+language: Ruby
+bundler_args: --deployment
+cache: bundler
+rvm: 2.6.3
+script:
+  - bundle exec rspec
